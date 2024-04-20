@@ -2,7 +2,7 @@ use std::num::ParseFloatError;
 
 #[derive(Debug, PartialEq)]
 pub enum Token {
-    Num(String),
+    Num(f64),
     Symbol(String),
     LParen,
     RParen,
@@ -22,7 +22,7 @@ pub fn tokenize(input: &str) -> Vec<Token> {
             _ => {
                 let i = parse_num(word);
                 if i.is_ok() {
-                    tokens.push(Token::Num(word.to_string()));
+                    tokens.push(Token::Num(i.unwrap()));
                 } else {
                     tokens.push(Token::Symbol(word.to_string()));
                 }
@@ -33,11 +33,8 @@ pub fn tokenize(input: &str) -> Vec<Token> {
     tokens
 }
 
-pub fn parse_num(num_str: &str) -> Result<&str, ParseFloatError> {
-    match num_str.parse::<f64>() {
-        Ok(_) => Ok(num_str),
-        Err(e) => Err(e),
-    }
+pub fn parse_num(num_str: &str) -> Result<f64, ParseFloatError> {
+    num_str.parse::<f64>()
 }
 #[cfg(test)]
 mod tests {
@@ -49,8 +46,8 @@ mod tests {
         let expected = vec![
             Token::LParen,
             Token::Symbol("+".to_string()),
-            Token::Num("1".to_string()),
-            Token::Num("2".to_string()),
+            Token::Num(1 as f64),
+            Token::Num(2 as f64),
             Token::RParen,
         ];
         assert_eq!(tokenize(input), expected);
@@ -64,10 +61,10 @@ mod tests {
             Token::Symbol("+".to_string()),
             Token::LParen,
             Token::Symbol("+".to_string()),
-            Token::Num("1".to_string()),
-            Token::Num("2".to_string()),
+            Token::Num(1.0),
+            Token::Num(2.0),
             Token::RParen,
-            Token::Num("2".to_string()),
+            Token::Num(2.0),
             Token::RParen,
         ];
         assert_eq!(tokenize(input), expected);
