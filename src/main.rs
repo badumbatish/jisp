@@ -1,10 +1,6 @@
-use pest::Parser;
-use pest_derive::Parser;
-
-#[derive(Parser)]
-#[grammar = "jisp.pest"]
-pub struct JispParser;
-
+mod lexer;
+mod object;
+mod parser;
 fn main() {
     println!("Hello, world!");
 }
