@@ -1,6 +1,6 @@
 #[derive(Debug, PartialEq)]
 pub enum Token {
-    Integer(i64),
+    Integer(String),
     Symbol(String),
     LParen,
     RParen,
@@ -20,7 +20,7 @@ pub fn tokenize(input: &str) -> Vec<Token> {
             _ => {
                 let i = word.parse::<i64>();
                 if i.is_ok() {
-                    tokens.push(Token::Integer(i.unwrap()));
+                    tokens.push(Token::Integer(i.unwrap().to_string()));
                 } else {
                     tokens.push(Token::Symbol(word.to_string()));
                 }
@@ -41,8 +41,8 @@ mod tests {
         let expected = vec![
             Token::LParen,
             Token::Symbol("+".to_string()),
-            Token::Integer(1),
-            Token::Integer(2),
+            Token::Integer("1".to_string()),
+            Token::Integer("2".to_string()),
             Token::RParen,
         ];
         assert_eq!(tokenize(input), expected);
