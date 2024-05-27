@@ -5,11 +5,11 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github badumbatish/jisp))
 
-(authors "Author Name")
+(authors "Jasmine Tang")
 
-(maintainers "Maintainer Name")
+(maintainers "Jasmine Tang")
 
 (license LICENSE)
 
@@ -17,8 +17,8 @@
 
 (package
  (name compiler)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (synopsis "Lisp compiler")
+ (description "A lisp compiler in progress")
  (depends ocaml dune)
  (tags
   (topics "to describe" your project)))
